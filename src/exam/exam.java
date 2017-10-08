@@ -3,6 +3,10 @@ import java.io.PrintStream;
 import java.util.Scanner;
 
 public class exam {
+	static Scanner sc = new Scanner(System.in);
+	static int [] price = { 250,120,45};
+	static String [] menu ={ "pizza","Chickens","coke"};
+	static int[] quantity = {0,0,0};
 	public static void blank(int total, int csh){
 		int money = csh - total;
         double ts = Math.floor(money/1000);
@@ -33,45 +37,44 @@ public class exam {
 }
 
 	
-	
-	public static void total(int pizza,int coke,int chick,int total){
-		int piz = pizza*250;
-		int chi = chick*120;
-		int co  = coke*45;
-		
-		
-		
-		  System.out.print(" +------ Menu ------+-- Qty --+-- Price --+\n");
-		if(pizza>0){
-			System.out.printf(" |Pizza\t\t   |    %5d|       %5d|\n ",pizza,piz);
+	public static int totalSum(){
+		int sum =0;
+		for (int i = 0; i < quantity.length; i++) {
+			sum=sum+quantity[i]*price[i];
 		}
-	    if(chick>0 ){
-	    	System.out.printf(" |Chicken\t   |    %5d|       %5d|\n ",chick,chi);
-	    }
-	    if(coke>0){
-	    	System.out.printf("|Coke\t \t   |    %5d|       %5d|\n ",coke,co);
-	    }
+		return sum;
+	}
+	public static void total(){
+	
+		
+		
+		
+		  System.out.print(" +------ Menu -----+-- Qty --+-- Price ---+\n");
+		  for (int i = 0; i < menu.length; i++) {
+			  if(quantity[i]>0){
+					System.out.printf("|%-8s\t   |    %5d|       %5d|\n ",menu[i],quantity[i],quantity[i]*price[i]);
+				}
+		}
+		
 	    System.out.print("+---------------------------+------------+\n");
-	    total = piz+chi+co;
-	    System.out.printf(" |total\t\t\t     |    %8d|\n ",total);
+	    
+	    System.out.printf(" |total\t\t\t     |    %8d|\n ",totalSum());
 	    System.out.print("+---------------------------+------------+\n");
 	}
 	
 	
 	
 	public static void main(String[] args) {
-	Scanner sc = new Scanner(System.in);
 	System.out.println("-------Welcome to SKE Restuarant --------");
-    System.out.println("1.) Pizza     250 Bath.");
-    System.out.println("2.) Chickens  120 Bath.");
-    System.out.println("3.) Coke      45  Bath.");
-    System.out.println("4.) Total ");
-    System.out.println("5.) Cash ");
-    System.out.println("6.) Exit  ");
+	for (int i = 0; i < menu.length; i++) {
+		System.out.printf("(%d.) %s    %d Bath.\n",i+1,menu[i],price[i]);
+	}
+
+    System.out.printf("%d.) Total ",menu.length+1);
+    System.out.printf("%d.) Cash ",menu.length+2);
+    System.out.printf("%d.) Exit  ",menu.length+3);
     int choi = -1;
-    int pizza =0;
-    int chick =0;
-    int coke =0;
+
     int csh = 0;
     int total = 0;
     
@@ -87,7 +90,7 @@ public class exam {
 			}
 
 			else if (choi == 4) {
-				total(pizza, coke, chick, total);
+				total();
 			}
 
 			else if (choi == 6) {
@@ -100,12 +103,13 @@ public class exam {
 
 				int quan = sc.nextInt();
 				if (choi == 1) {
+					quantity[0]=quantity[0]+quan;
 				}
 				if (choi == 2) {
-					chick = chick + quan;
+					quantity[1] = quantity[1]+ quan;
 
 				} else if (choi == 3) {
-					coke = coke + quan;
+					quantity[2] = quantity[2] + quan;
 
 				}
 
