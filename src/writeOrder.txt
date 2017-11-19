@@ -1,0 +1,6 @@
+# date & time
+# menu, quantity @ price
+# Total
+
+
+
